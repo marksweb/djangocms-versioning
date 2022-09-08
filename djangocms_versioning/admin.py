@@ -186,10 +186,7 @@ class ExtendedVersionAdminMixin(VersioningAdminMixin):
         Return the published url method if available, otherwise return None
         :return: method or None
         """
-        try:
-            return obj.content.get_absolute_url()
-        except AttributeError:
-            return None
+        return obj.content.get_absolute_url()
 
     def _list_actions(self, request):
         """
@@ -240,7 +237,7 @@ class ExtendedVersionAdminMixin(VersioningAdminMixin):
 
         return render_to_string(
             "djangocms_versioning/admin/icons/published_icon.html",
-            {"published_url": published_url},
+            {"url": published_url, "disabled": False},
         )
 
     def _get_edit_link(self, obj, request, disabled=False):
@@ -541,8 +538,8 @@ class VersionAdmin(admin.ModelAdmin):
             return ""
 
         return render_to_string(
-            "djangocms_versioning/admin/published_icon.html",
-            {"published_url": published_url},
+            "djangocms_versioning/admin/icons/preview.html",
+            {"url": published_url, "disabled": False},
         )
 
     def _get_edit_link(self, obj, request, disabled=False):
