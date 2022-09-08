@@ -532,10 +532,7 @@ class VersionAdmin(admin.ModelAdmin):
             # Don't display the link if it isn't published
             return ""
 
-        try:
-            published_url = obj.content.get_absolute_url()
-        except AttributeError:
-            return ""
+        published_url = obj.content.get_absolute_url()
 
         return render_to_string(
             "djangocms_versioning/admin/icons/preview.html",
